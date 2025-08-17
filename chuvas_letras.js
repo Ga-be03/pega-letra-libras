@@ -172,8 +172,8 @@
         tempoDiv.textContent = `Tempo: ${tempoRestante}s`;
         tempoRestante--;
         if (tempoRestante < 0) {
-            clearInterval(intervaloTempo);
-            clearInterval(intervaloLetras);
+            clearInterval(intervaloTempo); // Pausa cronômetro
+            clearInterval(intervaloLetras); // Pausa letras caindo!
             document.querySelectorAll('.letra').forEach(img => img.remove());
             // Cria elemento de resultado centralizado
             const resultado = document.createElement('div');
@@ -205,7 +205,7 @@
         document.getElementById('pontos').textContent = `Pontos: 0`;
         atualizarTempo();
         intervaloTempo = setInterval(atualizarTempo, 1000);
-        intervaloLetras = setInterval(criarLetrasComDesafio, 900);
+        intervaloLetras = setInterval(criarLetrasComDesafio, 900); // Guarde o retorno!
         // Remove resultado anterior se existir
         const resultado = document.querySelector('body > div[style*="fixed"]');
         if (resultado) resultado.remove();
