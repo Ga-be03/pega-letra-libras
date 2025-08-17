@@ -181,7 +181,7 @@
             resultado.style.top = '50%';
             resultado.style.left = '50%';
             resultado.style.transform = 'translate(-50%, -50%)';
-            resultado.style.background = '#fff';
+            resultado.style.background = '#104691ff';
             resultado.style.padding = '40px 60px';
             resultado.style.borderRadius = '20px';
             resultado.style.boxShadow = '0 0 30px #3338';
