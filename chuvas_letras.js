@@ -5,6 +5,7 @@
     let intervaloTempo;
     let intervaloLetras;
     const tempoDiv = document.getElementById('tempo');
+    let erros = 0; // Adicione contador de erros
 
     // Lista de imagens _2 para cursor
     const imagensCursor = [
@@ -67,7 +68,7 @@
             const letraCursor = cursorAtual.match(/^LETRA([A-Z])_2\.PNG$/i);
             if (letraCursor && letraCursor[1] === letra) {
                 img.src = `Img/Letra${letra}_2.png`;
-                img.style.boxShadow = "0 0 0 4px #2ecc40"; // verde
+                img.style.boxShadow = "0 0 0 4px #2ecc40";
                 img.style.transform = "scale(1.1) rotate(7deg)";
                 pontos++;
                 document.getElementById('pontos').textContent = `Pontos: ${pontos}`;
@@ -75,9 +76,9 @@
                     img.remove();
                     clearInterval(queda);
                 }, 250);
-                setCursorAleatorio(); // Troca cursor ao acertar
+                setCursorAleatorio();
             } else {
-                // Efeito de erro: borda vermelha e shake
+                erros++; // Conta erro
                 img.style.boxShadow = "0 0 0 4px red";
                 img.style.transform = "scale(1.1) rotate(-7deg)";
                 setTimeout(() => {
@@ -154,7 +155,7 @@
                     }, 250);
                     setCursorAleatorio(); // Troca cursor ao acertar
                 } else {
-                    // Efeito de erro: borda vermelha e shake
+                    erros++; // Conta erro ao clicar errado
                     img.style.boxShadow = "0 0 0 4px red";
                     img.style.transform = "scale(1.1) rotate(-7deg)";
                     setTimeout(() => {
@@ -173,9 +174,25 @@
         if (tempoRestante < 0) {
             clearInterval(intervaloTempo);
             clearInterval(intervaloLetras);
-            // Remove todas as letras restantes
             document.querySelectorAll('.letra').forEach(img => img.remove());
-            // Exibe mensagem de fim de jogo
+            // Cria elemento de resultado centralizado
+            const resultado = document.createElement('div');
+            resultado.style.position = 'fixed';
+            resultado.style.top = '50%';
+            resultado.style.left = '50%';
+            resultado.style.transform = 'translate(-50%, -50%)';
+            resultado.style.background = '#fff';
+            resultado.style.padding = '40px 60px';
+            resultado.style.borderRadius = '20px';
+            resultado.style.boxShadow = '0 0 30px #3338';
+            resultado.style.fontSize = '2rem';
+            resultado.style.textAlign = 'center';
+            resultado.innerHTML = `
+                <strong>Fim de jogo!</strong><br>
+                Acertos: <span style="color:green">${pontos}</span><br>
+                Erros: <span style="color:red">${erros}</span>
+            `;
+            document.body.appendChild(resultado);
             tempoDiv.textContent = "Tempo esgotado!";
         }
     }
@@ -184,10 +201,14 @@
     function iniciarJogo() {
         tempoRestante = 60;
         pontos = 0;
+        erros = 0;
         document.getElementById('pontos').textContent = `Pontos: 0`;
         atualizarTempo();
         intervaloTempo = setInterval(atualizarTempo, 1000);
         intervaloLetras = setInterval(criarLetrasComDesafio, 900);
+        // Remove resultado anterior se existir
+        const resultado = document.querySelector('body > div[style*="fixed"]');
+        if (resultado) resultado.remove();
     }
 
     // Inicia automaticamente ao carregar
