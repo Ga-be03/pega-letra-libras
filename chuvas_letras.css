@@ -1,0 +1,121 @@
+body {
+    background: linear-gradient(135deg, #0a192f 0%, #1976d2 100%);
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+#pontos {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: #3182ce;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    z-index: 10;
+    box-shadow: 0 2px 12px #3182ce55;
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#pontos.acertou {
+    background: #38a169;
+    animation: pontosPulse 0.4s;
+}
+
+@keyframes pontosPulse {
+    0% { transform: scale(1);}
+    50% { transform: scale(1.15);}
+    100% { transform: scale(1);}
+}
+
+#jogo-area {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.letra {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    border-radius: 30%;
+    box-shadow: 0 4px 16px #3182ce33;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #3182ce;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+    user-select: none;
+    animation: letraCai 3s linear forwards;
+    -webkit-border-radius: 30%;
+    -moz-border-radius: 30%;
+    -ms-border-radius: 30%;
+    -o-border-radius: 30%;
+}
+
+@keyframes letraCai {
+    0% { top: -100px; opacity: 0;}
+    10% { opacity: 1;}
+    100% { top: 100vh; opacity: 0.7;}
+}
+
+.letra:hover {
+    transform: scale(1.15) rotate(-8deg);
+    box-shadow: 0 8px 24px #3182ce55;
+    background: #e3f2fd;
+}
+
+.letra.acertou {
+    background: #38a169;
+    color: #fff;
+    animation: letraAcerto 0.4s;
+}
+
+@keyframes letraAcerto {
+    0% { transform: scale(1);}
+    50% { transform: scale(1.3) rotate(10deg);}
+    100% { transform: scale(1);}
+}
+
+#mouse-cursor {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    border: 3px solid #3182ce;
+    border-radius: 50%;
+    background: rgba(49,130,206,0.08);
+    box-shadow: 0 0 12px #3182ce44;
+    transition: background 0.2s, border 0.2s;
+}
+
+#mouse-cursor.ativo {
+    background: rgba(56,161,105,0.15);
+    border-color: #38a169;
+}
+
+#tempo {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: #1976d2;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    z-index: 10;
+    box-shadow: 0 2px 12px #1976d255;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background 0.3s;
+}
