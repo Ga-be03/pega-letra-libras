@@ -51,7 +51,7 @@
 
         // Animação de queda lenta
         let pos = -90;
-        const velocidade = 0.1 + Math.random() * 0.1; // mais lento
+        const velocidade = 0.05 + Math.random() * 0.07; // mais lento
         const queda = setInterval(() => {
             pos += velocidade;
             img.style.top = pos + 'px';
@@ -121,7 +121,7 @@
 
             // Animação de queda mais lenta
             let pos = -120;
-            const velocidade = 0.4 + Math.random() * 0.5; // mais lento
+            const velocidade = 0.08 + Math.random() * 0.12; // mais lento
             const queda = setInterval(() => {
                 pos += velocidade;
                 img.style.top = pos + 'px';
