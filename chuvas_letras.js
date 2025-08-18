@@ -153,7 +153,7 @@
 
             // Animação de queda mais lenta no mobile
             let pos = -120;
-            const velocidade = isMobile() ? 0.04 + Math.random() * 0.07 : 0.08 + Math.random() * 0.12;
+            const velocidade = isMobile() ? 0.015 + Math.random() * 0.025 : 0.08 + Math.random() * 0.12;
             const queda = setInterval(() => {
                 pos += velocidade;
                 img.style.top = pos + 'px';
