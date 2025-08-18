@@ -37,6 +37,56 @@
         mouseCursor.style.top = e.clientY + 'px';
     });
 
+    // Adapte o cursor para seguir o dedo no mobile
+    function atualizaCursor(e) {
+        let x, y;
+        if (e.touches && e.touches.length) {
+            x = e.touches[0].clientX;
+            y = e.touches[0].clientY;
+        } else {
+            x = e.clientX;
+            y = e.clientY;
+        }
+        mouseCursor.style.left = x + 'px';
+        mouseCursor.style.top = y + 'px';
+    }
+    document.addEventListener('mousemove', atualizaCursor);
+    document.addEventListener('touchmove', atualizaCursor);
+
+    // Função para associar clique e toque
+    function associaInteracao(img, queda, letra) {
+        function acao() {
+            const cursorAtual = mouseCursor.src.split('/').pop().toUpperCase();
+            const letraCursor = cursorAtual.match(/^LETRA([A-Z])_2\.PNG$/i);
+            if (letraCursor && letraCursor[1] === letra) {
+                img.src = `Img/Letra${letra}_2.png`;
+                img.style.boxShadow = "0 0 0 4px #2ecc40";
+                img.style.transform = "scale(1.1) rotate(7deg)";
+                pontos++;
+                document.getElementById('pontos').textContent = `Pontos: ${pontos}`;
+                setTimeout(() => {
+                    img.remove();
+                    clearInterval(queda);
+                }, 250);
+                setCursorAleatorio();
+            } else {
+                erros++;
+                img.style.boxShadow = "0 0 0 4px red";
+                img.style.transform = "scale(1.1) rotate(-7deg)";
+                setTimeout(() => {
+                    img.style.boxShadow = "";
+                    img.style.transform = "";
+                }, 300);
+                setCursorAleatorio();
+            }
+        }
+        img.onclick = acao;
+        img.ontouchstart = function(e) {
+            e.preventDefault();
+            acao();
+        };
+    }
+
     // Função para criar uma letra caindo
     function criarLetra() {
         const letra = letras[Math.floor(Math.random() * letras.length)];
@@ -61,32 +111,7 @@
             }
         }, 16);
 
-        // Clique: só ganha ponto se cursor igual à letra
-        img.onclick = function() {
-            // Extrai a letra do cursor atual
-            const cursorAtual = mouseCursor.src.split('/').pop().toUpperCase();
-            const letraCursor = cursorAtual.match(/^LETRA([A-Z])_2\.PNG$/i);
-            if (letraCursor && letraCursor[1] === letra) {
-                img.src = `Img/Letra${letra}_2.png`;
-                img.style.boxShadow = "0 0 0 4px #2ecc40";
-                img.style.transform = "scale(1.1) rotate(7deg)";
-                pontos++;
-                document.getElementById('pontos').textContent = `Pontos: ${pontos}`;
-                setTimeout(() => {
-                    img.remove();
-                    clearInterval(queda);
-                }, 250);
-                setCursorAleatorio();
-            } else {
-                erros++; // Conta erro
-                img.style.boxShadow = "0 0 0 4px red";
-                img.style.transform = "scale(1.1) rotate(-7deg)";
-                setTimeout(() => {
-                    img.style.boxShadow = "";
-                    img.style.transform = "";
-                }, 300);
-            }
-        };
+        associaInteracao(img, queda, letra); // Use função para clique/toque
     }
 
     // Função para criar várias letras caindo, incluindo a correta e outras parecidas
@@ -139,31 +164,7 @@
                 return false; // Impede arrastar a imagem
             };
 
-            // Clique: só ganha ponto se cursor igual à letra
-            img.onclick = function() {
-                const cursorAtual = mouseCursor.src.split('/').pop().toUpperCase();
-                const letraCursor = cursorAtual.match(/^LETRA([A-Z])_2\.PNG$/i);
-                if (letraCursor && letraCursor[1] === letra) {
-                    img.src = `Img/Letra${letra}_2.png`;
-                    img.style.boxShadow = "0 0 0 4px #2ecc40"; // verde
-                    img.style.transform = "scale(1.1) rotate(7deg)";
-                    pontos++;
-                    document.getElementById('pontos').textContent = `Pontos: ${pontos}`;
-                    setTimeout(() => {
-                        img.remove();
-                        clearInterval(queda);
-                    }, 250);
-                    setCursorAleatorio(); // Troca cursor ao acertar
-                } else {
-                    erros++; // Conta erro ao clicar errado
-                    img.style.boxShadow = "0 0 0 4px red";
-                    img.style.transform = "scale(1.1) rotate(-7deg)";
-                    setTimeout(() => {
-                        img.style.boxShadow = "";
-                        img.style.transform = "";
-                    }, 300);
-                }
-            };
+            associaInteracao(img, queda, letra); // Use função para clique/toque
         });
     }
 
