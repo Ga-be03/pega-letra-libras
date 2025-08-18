@@ -222,9 +222,6 @@
     // Inicia automaticamente ao carregar
     window.onload = iniciarJogo;
 
-    // Cria letras caindo a cada intervalo
-    setInterval(criarLetrasComDesafio, 900);
-
     // Responsivo: ajusta área do jogo ao redimensionar
     window.addEventListener('resize', () => {
         document.getElementById('jogo-area').style.width = window.innerWidth + 'px';
