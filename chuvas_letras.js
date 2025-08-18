@@ -87,6 +87,11 @@
         };
     }
 
+    // Detecta se é mobile
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
+    }
+
     // Função para criar uma letra caindo
     function criarLetra() {
         const letra = letras[Math.floor(Math.random() * letras.length)];
@@ -99,19 +104,19 @@
         img.dataset.letra = letra;
         document.getElementById('jogo-area').appendChild(img);
 
-        // Animação de queda lenta
+        // Animação de queda lenta (mais lenta no mobile)
         let pos = -90;
-        const velocidade = 0.05 + Math.random() * 0.07; // mais lento
+        const velocidade = isMobile() ? 0.025 + Math.random() * 0.04 : 0.05 + Math.random() * 0.07;
         const queda = setInterval(() => {
             pos += velocidade;
             img.style.top = pos + 'px';
             if (pos > window.innerHeight) {
-            img.remove();
-            clearInterval(queda);
+                img.remove();
+                clearInterval(queda);
             }
         }, 16);
 
-        associaInteracao(img, queda, letra); // Use função para clique/toque
+        associaInteracao(img, queda, letra);
     }
 
     // Função para criar várias letras caindo, incluindo a correta e outras parecidas
@@ -144,9 +149,9 @@
             img.dataset.letra = letra;
             document.getElementById('jogo-area').appendChild(img);
 
-            // Animação de queda mais lenta
+            // Animação de queda mais lenta no mobile
             let pos = -120;
-            const velocidade = 0.08 + Math.random() * 0.12; // mais lento
+            const velocidade = isMobile() ? 0.04 + Math.random() * 0.07 : 0.08 + Math.random() * 0.12;
             const queda = setInterval(() => {
                 pos += velocidade;
                 img.style.top = pos + 'px';
