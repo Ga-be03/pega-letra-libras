@@ -104,11 +104,11 @@
         img.dataset.letra = letra;
         document.getElementById('jogo-area').appendChild(img);
 
-        // Animação de queda lenta (mais lenta no mobile)
+        // Animação de queda.
         let pos = -50;
         // Quanto MENOR o valor de 'velocidade', MAIS DEVAGAR a letra cai.
         // Quanto MAIOR o valor de 'velocidade', MAIS RÁPIDO a letra cai.
-        const velocidade = isMobile() ? 0.025 + Math.random() * 0.04 : 0.05 + Math.random() * 0.07;
+        const velocidade = isMobile() ? (0.025 + Math.random() * 0.04) / 2 : (0.05 + Math.random() * 0.07) / 2;
         const queda = setInterval(() => {
             pos += velocidade;
             img.style.top = pos + 'px';
