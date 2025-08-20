@@ -97,10 +97,14 @@ function criarLetra() {
     img.style.left = Math.random() * (window.innerWidth - 80) + 'px';
     img.style.top = '-90px';
     img.dataset.letra = letra;
+    // Aumenta tamanho no mobile
+    if (isMobile()) {
+        img.style.width = "130px";
+        img.style.height = "130px";
+    }
     document.getElementById('jogo-area').appendChild(img);
 
     let pos = -50;
-    // Desktop: velocidade original | Mobile: velocidade menor
     const velocidade = isMobile() ? 0.015 + Math.random() * 0.025 : 0.05 + Math.random() * 0.07;
     const queda = setInterval(() => {
         pos += velocidade;
@@ -140,15 +144,20 @@ function criarLetrasComDesafio() {
         img.src = `Img/Letra${letra}.png`;
         img.alt = `Letra ${letra} em LIBRAS`;
         img.className = 'letra';
-        img.style.width = "110px";
-        img.style.height = "110px";
+        // Aumenta tamanho no mobile
+        if (isMobile()) {
+            img.style.width = "130px";
+            img.style.height = "130px";
+        } else {
+            img.style.width = "110px";
+            img.style.height = "110px";
+        }
         img.style.left = Math.random() * (window.innerWidth - 100) + 'px';
         img.style.top = '-120px';
         img.dataset.letra = letra;
         document.getElementById('jogo-area').appendChild(img);
 
         let pos = -120;
-        // Desktop: velocidade original | Mobile: velocidade menor
         const velocidade = isMobile() ? 0.015 + Math.random() * 0.025 : 0.08 + Math.random() * 0.12;
         const queda = setInterval(() => {
             pos += velocidade;
