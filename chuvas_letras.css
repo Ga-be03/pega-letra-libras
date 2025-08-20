@@ -13,7 +13,7 @@ body {
     color: #fff;
     padding: 0.7rem 1.5rem;
     border-radius: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.6rem; /* aumentado */
     z-index: 10;
     box-shadow: 0 2px 12px #3182ce55;
     letter-spacing: 1px;
@@ -112,7 +112,7 @@ body {
     color: #fff;
     padding: 0.7rem 1.5rem;
     border-radius: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.6rem; /* aumentado */
     z-index: 10;
     box-shadow: 0 2px 12px #1976d255;
     font-weight: bold;
