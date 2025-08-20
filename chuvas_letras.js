@@ -99,8 +99,8 @@ function criarLetra() {
     img.dataset.letra = letra;
     // Aumenta tamanho no mobile
     if (isMobile()) {
-        img.style.width = "130px";
-        img.style.height = "130px";
+        img.style.width = "150px";
+        img.style.height = "150px";
     }
     document.getElementById('jogo-area').appendChild(img);
 
