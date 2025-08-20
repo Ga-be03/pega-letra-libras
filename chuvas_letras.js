@@ -28,8 +28,14 @@ document.body.style.cursor = "none";
 function setCursorAleatorio() {
     mouseCursor.src = imagemCursorAleatoria();
 }
-mouseCursor.style.width = "100px";
-mouseCursor.style.height = "100px";
+// Aumenta o tamanho do cursor no mobile
+if (isMobile()) {
+    mouseCursor.style.width = "180px";
+    mouseCursor.style.height = "180px";
+} else {
+    mouseCursor.style.width = "100px";
+    mouseCursor.style.height = "100px";
+}
 mouseCursor.style.display = "block";
 
 // Cursor segue mouse ou dedo (apenas um listener)
@@ -87,6 +93,17 @@ function isMobile() {
     return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
 }
 
+// Função utilitária para definir tamanho da letra
+function definirTamanhoLetra(img) {
+    if (isMobile()) {
+        img.style.width = "150px";
+        img.style.height = "150px";
+    } else {
+        img.style.width = "110px";
+        img.style.height = "110px";
+    }
+}
+
 // Função para criar uma letra caindo
 function criarLetra() {
     const letra = letras[Math.floor(Math.random() * letras.length)];
@@ -97,11 +114,7 @@ function criarLetra() {
     img.style.left = Math.random() * (window.innerWidth - 80) + 'px';
     img.style.top = '-90px';
     img.dataset.letra = letra;
-    // Aumenta tamanho no mobile
-    if (isMobile()) {
-        img.style.width = "200px";
-        img.style.height = "200px";
-    }
+    definirTamanhoLetra(img);
     document.getElementById('jogo-area').appendChild(img);
 
     let pos = -50;
@@ -144,14 +157,7 @@ function criarLetrasComDesafio() {
         img.src = `Img/Letra${letra}.png`;
         img.alt = `Letra ${letra} em LIBRAS`;
         img.className = 'letra';
-        // Aumenta tamanho no mobile
-        if (isMobile()) {
-            img.style.width = "130px";
-            img.style.height = "130px";
-        } else {
-            img.style.width = "110px";
-            img.style.height = "110px";
-        }
+        definirTamanhoLetra(img);
         img.style.left = Math.random() * (window.innerWidth - 100) + 'px';
         img.style.top = '-120px';
         img.dataset.letra = letra;
@@ -229,3 +235,6 @@ function ajustaAreaJogo() {
     area.style.width = window.innerWidth + 'px';
     area.style.height = window.innerHeight + 'px';
 }
+
+// Garante responsividade ao carregar
+ajustaAreaJogo();
