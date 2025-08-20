@@ -189,23 +189,34 @@ function atualizarTempo() {
         clearInterval(intervaloTempo);
         clearInterval(intervaloLetras);
         document.querySelectorAll('.letra').forEach(img => img.remove());
-        // Cria elemento de resultado centralizado
+        // Painel visualmente melhorado
         const resultado = document.createElement('div');
         resultado.id = "painel-resultado";
         resultado.style.position = 'fixed';
         resultado.style.top = '50%';
         resultado.style.left = '50%';
         resultado.style.transform = 'translate(-50%, -50%)';
-        resultado.style.background = '#104691ff';
-        resultado.style.padding = '40px 60px';
-        resultado.style.borderRadius = '20px';
-        resultado.style.boxShadow = '0 0 30px #3338';
-        resultado.style.fontSize = '2rem';
+        resultado.style.background = 'linear-gradient(135deg, #1976d2 60%, #0a192f 100%)';
+        resultado.style.padding = '3.5rem 2.5rem 2.5rem 2.5rem';
+        resultado.style.borderRadius = '2.2rem';
+        resultado.style.boxShadow = '0 8px 40px #0a192faa, 0 2px 16px #1976d288';
+        resultado.style.fontSize = '2.2rem';
         resultado.style.textAlign = 'center';
+        resultado.style.color = '#fff';
+        resultado.style.zIndex = '9999';
+        resultado.style.border = '4px solid #fff3';
+        resultado.style.backdropFilter = 'blur(2px)';
         resultado.innerHTML = `
-            <strong>Fim de jogo!</strong><br>
-            Acertos: <span style="color:green">${pontos}</span><br>
-            Erros: <span style="color:red">${erros}</span>
+            <div style="font-size:2.6rem;font-weight:700;letter-spacing:1px;margin-bottom:1.2rem;">⏰ Fim de jogo!</div>
+            <div style="font-size:2rem;margin-bottom:0.7rem;">
+                <span style="color:#38d39f;font-weight:700;">Acertos:</span>
+                <span style="color:#fff;font-size:2.3rem;font-weight:800;">${pontos}</span>
+            </div>
+            <div style="font-size:2rem;">
+                <span style="color:#ff5252;font-weight:700;">Erros:</span>
+                <span style="color:#fff;font-size:2.3rem;font-weight:800;">${erros}</span>
+            </div>
+            <button onclick="window.location.reload()" style="margin-top:2.2rem;padding:1rem 2.5rem;font-size:1.3rem;border-radius:1rem;background:#38a169;color:#fff;border:none;box-shadow:0 2px 12px #38a16955;cursor:pointer;font-weight:700;transition:background 0.2s;">Jogar Novamente</button>
         `;
         document.body.appendChild(resultado);
         tempoDiv.textContent = "Tempo esgotado!";
