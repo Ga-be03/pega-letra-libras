@@ -178,7 +178,7 @@ body {
 @media (max-width: 600px) {
     #pontos,
     #tempo {
-        font-size: 14vw;
-        padding: 2.2rem 4.5rem;
+        font-size: 8vw;
+        padding: 1.2rem 2.5rem;
     }
 }
