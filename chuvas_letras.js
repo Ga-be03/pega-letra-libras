@@ -189,7 +189,6 @@ function atualizarTempo() {
         clearInterval(intervaloTempo);
         clearInterval(intervaloLetras);
         document.querySelectorAll('.letra').forEach(img => img.remove());
-        // Painel visualmente melhorado
         const resultado = document.createElement('div');
         resultado.id = "painel-resultado";
         resultado.style.position = 'fixed';
@@ -197,26 +196,41 @@ function atualizarTempo() {
         resultado.style.left = '50%';
         resultado.style.transform = 'translate(-50%, -50%)';
         resultado.style.background = 'linear-gradient(135deg, #1976d2 60%, #0a192f 100%)';
-        resultado.style.padding = '3.5rem 2.5rem 2.5rem 2.5rem';
-        resultado.style.borderRadius = '2.2rem';
+        resultado.style.padding = isMobile() ? '6vw 4vw 5vw 4vw' : '3.5rem 2.5rem 2.5rem 2.5rem';
+        resultado.style.borderRadius = isMobile() ? '7vw' : '2.2rem';
         resultado.style.boxShadow = '0 8px 40px #0a192faa, 0 2px 16px #1976d288';
-        resultado.style.fontSize = '2.2rem';
+        resultado.style.fontSize = isMobile() ? '7vw' : '2.2rem';
         resultado.style.textAlign = 'center';
         resultado.style.color = '#fff';
-        resultado.style.zIndex = '9999';
-        resultado.style.border = '4px solid #fff3';
+        resultado.style.zIndex = '99999';
+        resultado.style.border = '4px solid #38d39f';
         resultado.style.backdropFilter = 'blur(2px)';
+        resultado.style.display = "block";
+        resultado.style.maxWidth = isMobile() ? '90vw' : '500px';
+        resultado.style.width = '90vw';
         resultado.innerHTML = `
-            <div style="font-size:2.6rem;font-weight:700;letter-spacing:1px;margin-bottom:1.2rem;">⏰ Fim de jogo!</div>
-            <div style="font-size:2rem;margin-bottom:0.7rem;">
+            <div style="font-size:${isMobile() ? '9vw' : '2.6rem'};font-weight:700;letter-spacing:1px;margin-bottom:1.2rem;line-height:1.1;">⏰ Fim de jogo!</div>
+            <div style="font-size:${isMobile() ? '7vw' : '2rem'};margin-bottom:0.7rem;">
                 <span style="color:#38d39f;font-weight:700;">Acertos:</span>
-                <span style="color:#fff;font-size:2.3rem;font-weight:800;">${pontos}</span>
+                <span style="color:#fff;font-size:${isMobile() ? '8vw' : '2.3rem'};font-weight:800;">${pontos}</span>
             </div>
-            <div style="font-size:2rem;">
+            <div style="font-size:${isMobile() ? '7vw' : '2rem'};">
                 <span style="color:#ff5252;font-weight:700;">Erros:</span>
-                <span style="color:#fff;font-size:2.3rem;font-weight:800;">${erros}</span>
+                <span style="color:#fff;font-size:${isMobile() ? '8vw' : '2.3rem'};font-weight:800;">${erros}</span>
             </div>
-            <button onclick="window.location.reload()" style="margin-top:2.2rem;padding:1rem 2.5rem;font-size:1.3rem;border-radius:1rem;background:#38a169;color:#fff;border:none;box-shadow:0 2px 12px #38a16955;cursor:pointer;font-weight:700;transition:background 0.2s;">Jogar Novamente</button>
+            <button onclick="window.location.reload()" style="
+                margin-top:${isMobile() ? '7vw' : '2.2rem'};
+                padding:${isMobile() ? '4vw 10vw' : '1rem 2.5rem'};
+                font-size:${isMobile() ? '6vw' : '1.3rem'};
+                border-radius:${isMobile() ? '3vw' : '1rem'};
+                background:#38a169;
+                color:#fff;
+                border:none;
+                box-shadow:0 2px 12px #38a16955;
+                cursor:pointer;
+                font-weight:700;
+                transition:background 0.2s;
+            ">Jogar Novamente</button>
         `;
         document.body.appendChild(resultado);
         tempoDiv.textContent = "Tempo esgotado!";
