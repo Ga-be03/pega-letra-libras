@@ -30,8 +30,8 @@ function setCursorAleatorio() {
 }
 // Aumenta o tamanho do cursor no mobile
 if (isMobile()) {
-    mouseCursor.style.width = "180px";
-    mouseCursor.style.height = "180px";
+    mouseCursor.style.width = "150px";
+    mouseCursor.style.height = "150px";
 } else {
     mouseCursor.style.width = "100px";
     mouseCursor.style.height = "100px";
