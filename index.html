@@ -7,6 +7,16 @@
     <script src="chuvas_letras.js" defer></script>
 </head>
 <body>
+    <div id="tela-inicial" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(10,25,47,0.97);">
+        <div style="background:linear-gradient(135deg,#1976d2 60%,#0a192f 100%);padding:2.5rem 2rem 2rem 2rem;border-radius:2rem;box-shadow:0 8px 40px #0a192faa,0 2px 16px #1976d288;text-align:center;max-width:90vw;">
+            <div style="font-size:2.1rem;font-weight:700;color:#fff;margin-bottom:1.5rem;letter-spacing:1px;">
+                Teste seu conhecimento em<br>Alfabeto Manual em LIBRAS
+            </div>
+            <button id="btn-iniciar" style="padding:1rem 3rem;font-size:1.3rem;border-radius:1rem;background:#38a169;color:#fff;border:none;box-shadow:0 2px 12px #38a16955;cursor:pointer;font-weight:700;transition:background 0.2s;">
+                Iniciar
+            </button>
+        </div>
+    </div>
     <div id="pontos">Pontos: 0</div>
     <div id="tempo">Tempo: 60s</div>
     <div id="jogo-area"></div>

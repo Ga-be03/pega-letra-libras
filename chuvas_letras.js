@@ -252,7 +252,17 @@ function iniciarJogo() {
 }
 
 // Inicia automaticamente ao carregar
-window.onload = iniciarJogo;
+window.onload = function() {
+    ajustaAreaJogo();
+    // Só inicia o jogo após clicar no botão
+    const btn = document.getElementById('btn-iniciar');
+    if (btn) {
+        btn.onclick = function() {
+            document.getElementById('tela-inicial').style.display = 'none';
+            iniciarJogo();
+        };
+    }
+};
 
 // Responsivo: ajusta área do jogo ao redimensionar
 function ajustaAreaJogo() {
