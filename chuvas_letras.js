@@ -158,7 +158,8 @@ function criarLetrasComDesafio() {
         img.alt = `Letra ${letra} em LIBRAS`;
         img.className = 'letra';
         definirTamanhoLetra(img);
-        img.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        const larguraLetra = isMobile() ? 150 : 110;
+        img.style.left = posicaoLivre(larguraLetra) + 'px';
         img.style.top = '-120px';
         img.dataset.letra = letra;
         document.getElementById('jogo-area').appendChild(img);
@@ -179,6 +180,29 @@ function criarLetrasComDesafio() {
 
         associaInteracao(img, queda, letra);
     });
+}
+
+// Função para obter uma posição segura para nova letra
+function posicaoLivre(larguraLetra) {
+    const tentativasMax = 30;
+    for (let tent = 0; tent < tentativasMax; tent++) {
+        const posX = Math.random() * (window.innerWidth - larguraLetra);
+        let sobrepoe = false;
+        document.querySelectorAll('.letra').forEach(img => {
+            const xExistente = parseFloat(img.style.left);
+            const larguraExistente = img.offsetWidth || larguraLetra;
+            // Verifica se há interseção real entre as caixas das letras
+            if (
+                (posX < xExistente + larguraExistente) &&
+                (posX + larguraLetra > xExistente)
+            ) {
+                sobrepoe = true;
+            }
+        });
+        if (!sobrepoe) return posX;
+    }
+    // Se não achar posição livre, retorna aleatória
+    return Math.random() * (window.innerWidth - larguraLetra);
 }
 
 // Atualiza o cronômetro
