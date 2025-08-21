@@ -252,7 +252,7 @@ function iniciarJogo() {
 }
 
 // Inicia automaticamente ao carregar
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', function() {
     ajustaAreaJogo();
     // Só inicia o jogo após clicar no botão
     const btn = document.getElementById('btn-iniciar');
@@ -262,7 +262,7 @@ window.onload = function() {
             iniciarJogo();
         };
     }
-};
+});
 
 // Responsivo: ajusta área do jogo ao redimensionar
 function ajustaAreaJogo() {
