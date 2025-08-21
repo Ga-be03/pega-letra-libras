@@ -160,11 +160,13 @@ function criarLetrasComDesafio() {
         definirTamanhoLetra(img);
         const larguraLetra = isMobile() ? 150 : 110;
         img.style.left = posicaoLivre(larguraLetra) + 'px';
-        img.style.top = '-120px';
+        // Sorteia a posição vertical inicial entre -220px e -40px
+        const topInicial = -220 + Math.random() * 180;
+        img.style.top = topInicial + 'px';
         img.dataset.letra = letra;
         document.getElementById('jogo-area').appendChild(img);
 
-        let pos = -120;
+        let pos = topInicial;
         const velocidade = isMobile() ? 0.015 + Math.random() * 0.025 : 0.08 + Math.random() * 0.12;
         const queda = setInterval(() => {
             pos += velocidade;
